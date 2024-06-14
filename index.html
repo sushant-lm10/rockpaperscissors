@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <style>
+
+    img{
+      height: 40px;
+      max-width: 100%;
+      border-radius: 50%;
+      border: solid white;
+    }
+    .btn-1{
+      border: none;
+      outline: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    .dynamic-img{
+      height: 28px;
+     border: none;
+    }
+   .btn{
+    display: block;
+    padding: 4px 8px;
+    margin: 14px 35px;
+    }
+  </style>
+</head>
+<body style="background-color: black; color: white;">
+  <p style="font-size: 20px;font-weight: 600;">Rock Paper Scissors</p>
+<button class="btn-1" onclick="
+result('rock');
+"><img src="https://supersimple.dev/projects/rock-paper-scissors/images/rock-emoji.png" alt="Rock"></button>
+<button  class="btn-1" onclick="
+result('paper');
+"><img src="https://supersimple.dev/projects/rock-paper-scissors/images/paper-emoji.png" alt="Paper"></button>
+<button  class="btn-1" onclick="
+result('scissors');
+"><img src="https://supersimple.dev/projects/rock-paper-scissors/images/scissors-emoji.png" alt="Scissors"></button>
+<button class="btn" onclick="
+details.draw = 0;
+details.win = 0;
+details.losses = 0;
+paraInfo.innerHTML = '';
+para.innerHTML='win: '+ details.win +'<br>'+ 'losses: '+details.losses +'<br>' +' draw: '+details.draw;
+">Reset Score</button>
+<p class="para-Info"></p>
+<p class="para"></p>
+  <script>
+    const details = JSON.parse(localStorage.getItem('scoreDetails'))||{
+      draw:0,
+      win:0,
+      losses:0
+    };
+    const para = document.querySelector(".para");
+    const paraInfo = document.querySelector(".para-Info");
+function result(parameter){
+
+const arr = ['rock','paper','scissors'];
+const computerChoice = arr[Math.floor(Math.random()*arr.length)];
+
+      if(parameter==='rock'){
+      if(parameter === computerChoice){
+        paraInfo.innerHTML =  `computer chose: <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">, DRAW.`;
+        details.draw++;
+      }
+      else if(computerChoice ==='paper'){
+        paraInfo.innerHTML = `computer chose:  <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">,, Computer WIN.`;
+       details.losses++;
+      }
+      else{
+        paraInfo.innerHTML =  `computer chose: <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">, You win.`;
+      details.win++;
+      }
+      }
+
+      if(parameter==='paper'){
+      if(parameter === computerChoice){
+        paraInfo.innerHTML = `computer chose: <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">, DRAW.`;
+      details.draw++;
+
+      }
+      else if(computerChoice ==='rock'){
+        paraInfo.innerHTML = `computer chose:  <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">,You WIN.`;
+        details.win++;
+      }
+      else{
+        paraInfo.innerHTML = `computer chose: <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">,You LOSE.`;
+        details.losses++;
+
+      }
+      }
+
+      if(parameter==='scissors'){
+      if(parameter === computerChoice){
+        paraInfo.innerHTML = `computer chose:  <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">, DRAW.`;
+      details.draw++;
+
+      }
+      else if(computerChoice ==='paper'){
+        paraInfo.innerHTML = `computer chose:  <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">,You WIN.`;
+        details.win++;
+      }
+
+      else{
+        paraInfo.innerHTML = `computer chose: <img src="https://supersimple.dev/projects/rock-paper-scissors/images/${computerChoice}-emoji.png" class="dynamic-img">, You LOSE.`;
+        details.losses++;
+
+      }
+      }
+      localStorage.setItem('scoreDetails',JSON.stringify(details));//localStorage  supports strings only
+      console.log(JSON.parse(localStorage.getItem('scoreDetails')));
+
+return  para.innerHTML = `wins:${details.win}<br> losses:${details.losses} <br>draw:${details.draw}`;
+//<---end--->
+}
+  </script>
+</body>
+</html>
